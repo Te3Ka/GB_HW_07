@@ -114,33 +114,33 @@ int GetRowsPosition()
 }
 
 //Поиска элемента по столбцу и строке   
-void FindElement(int[,] array2d, int column, int row)
+void FindElement(int[,] array2d, int row, int column)
 {
-    if (column > array2d.GetLength(0) || row > array2d.GetLength(1))
+    if (row > array2d.GetLength(0) || column > array2d.GetLength(1))
     {
-        Console.WriteLine($"Элемента на позиции {column}, {row} не существует");
+        Console.WriteLine($"Элемента на позиции {row}, {column} не существует");
         return;
     }
     else
     {
-        Console.WriteLine($"Элемента на позиции {column}, {row} => {array2d[column - 1, row - 1]}");
+        Console.WriteLine($"Элемента на позиции {row}, {column} => {array2d[row - 1, column - 1]}");
         return;
     }
 }
 
 Console.WriteLine("Программа генерирует двумерный массив из случайных целых чисел в количестве и диапазоне, которое вводит пользователь.");
 Console.WriteLine("После программа показывает значение элемента массива по введённым координатам от пользователя.");
-int m = GetColumnsLengthArray();
-int n = GetRowsLengthArray();
+int m = GetRowsLengthArray();
+int n = GetColumnsLengthArray();
 int min = GetMinMax("минимума");
 int max = GetMinMax("максимума");
 
 int[,] random2dArray = CreateRandom2DArray(m, n, min, max);
 PrintArray(random2dArray);
 
-int columnsPosition = GetColumnsPosition();
 int rowsPosition = GetRowsPosition();
+int columnsPosition = GetColumnsPosition();
 
-FindElement(random2dArray, columnsPosition, rowsPosition);
+FindElement(random2dArray, rowsPosition, columnsPosition);
 
 Author();

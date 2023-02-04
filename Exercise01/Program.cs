@@ -86,8 +86,8 @@ float GetMinMax(string minOrMax)
 }
 
 Console.WriteLine("Программа генерирует двумерный массив из случайных вещественных чисел в количестве и диапазоне, которое вводит пользователь.");
-int m = GetColumnsLengthArray();
-int n = GetRowsLengthArray();
+int m = GetRowsLengthArray();
+int n = GetColumnsLengthArray();
 float min = GetMinMax("минимума");
 float max = GetMinMax("максимума");
 PrintArray(CreateRandom2DArray(m, n, min, max));

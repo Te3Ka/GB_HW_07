@@ -4,14 +4,13 @@
 /***********************/
 
 /*
-Задайте двумерный массив из целых чисел. Найдите среднее арифметическое элементов в каждом столбце.
-
+Задайте двумерный массив из целых чисел.
+Найдите среднее арифметическое элементов в каждом столбце.
 Например, задан массив:
 1 4 7 2
 5 9 2 3
 8 4 2 4
 Среднее арифметическое каждого столбца: 4,6; 5,6; 3,6; 3.
-
 */
 
 //Метод с указанием автора
@@ -24,18 +23,31 @@ void Author()
 }
 
 //Печать массива на экран
-void PrintArray(int[,] arrayPrint)
+void PrintArray2d(int[,] arrayPrint2d)
 {
-    for (int i = 0; i < arrayPrint.GetLength(0); i++)
+    for (int i = 0; i < arrayPrint2d.GetLength(0); i++)
     {
         Console.Write("[");
-        for (int j = 0; j < arrayPrint.GetLength(1); j++)
+        for (int j = 0; j < arrayPrint2d.GetLength(1); j++)
         {
-            if (j == (arrayPrint.GetLength(1) - 1))
-                Console.WriteLine(String.Format("{0,5}]", arrayPrint[i, j]));
+            if (j == (arrayPrint2d.GetLength(1) - 1))
+                Console.WriteLine(String.Format("{0,5}]", arrayPrint2d[i, j]));
             else
-                Console.Write(String.Format("{0,5} ", arrayPrint[i, j]));
+                Console.Write(String.Format("{0,5} ", arrayPrint2d[i, j]));
         }
+    }
+}
+
+//Печать одномерного массива на экран
+void PrintArray(float[] arrayPrint)
+{
+    Console.Write("[");
+    for (int index = 0; index < arrayPrint.Length; index++)
+    {
+        if (index == (arrayPrint.Length - 1))
+            Console.WriteLine(String.Format("{0,5:0.00}]", arrayPrint[index]));
+        else
+            Console.Write(String.Format("{0,5:0.00} ", arrayPrint[index]));
     }
 }
 
@@ -88,15 +100,34 @@ int GetMinMax(string minOrMax)
     return result;
 }
 
+//Создание массива средних арифметических по каждому столбцу
+float[] CreateArithmeticMeanArray(int[,] array2d)
+{
+    float[] resultArray = new float[array2d.GetLength(1)];
+    float sum = 0;
+    for (int i = 0; i < array2d.GetLength(1); i++)
+    {
+        sum = 0;
+        for (int j = 0; j < array2d.GetLength(0); j++)
+        {
+            sum += array2d[j, i];
+        }
+        resultArray[i] = sum / array2d.GetLength(0);
+    }
+    return resultArray;
+}
 
 Console.WriteLine("Программа генерирует двумерный массив из случайных целых чисел в количестве и диапазоне, которое вводит пользователь.");
-Console.WriteLine("После программа показывает значение элемента массива по введённым координатам от пользователя.");
-int m = GetColumnsLengthArray();
-int n = GetRowsLengthArray();
+Console.WriteLine("После программа считает среднее арифметическое каждого столбца и выводит его на экран.");
+int m = GetRowsLengthArray();
+int n = GetColumnsLengthArray();
 int min = GetMinMax("минимума");
 int max = GetMinMax("максимума");
 
 int[,] random2dArray = CreateRandom2DArray(m, n, min, max);
-PrintArray(random2dArray);
+PrintArray2d(random2dArray);
+float[] arithmeticMeanArray = CreateArithmeticMeanArray(random2dArray);
+Console.WriteLine("Средние арифметические:");
+PrintArray(arithmeticMeanArray);
 
 Author();
