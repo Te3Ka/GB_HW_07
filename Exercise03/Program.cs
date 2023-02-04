@@ -4,13 +4,14 @@
 /***********************/
 
 /*
-Напишите программу, которая на вход принимает позиции элемента в двумерном массиве,
-и возвращает значение этого элемента или же указание, что такого элемента нет.
+Задайте двумерный массив из целых чисел. Найдите среднее арифметическое элементов в каждом столбце.
+
 Например, задан массив:
 1 4 7 2
 5 9 2 3
 8 4 2 4
-17 -> такого числа в массиве нет
+Среднее арифметическое каждого столбца: 4,6; 5,6; 3,6; 3.
+
 */
 
 //Метод с указанием автора
@@ -87,46 +88,6 @@ int GetMinMax(string minOrMax)
     return result;
 }
 
-//Получение позиции столбца от пользователя
-int GetColumnsPosition()
-{
-    Console.Write("В каком столбце ищем? ");
-    int.TryParse(Console.ReadLine(), out int num);
-    while (num <= 0)
-    {
-        Console.WriteLine("Число меньше 1! Нельзя совершить поиск. Введите заново: ");
-        int.TryParse(Console.ReadLine(), out num);
-    }
-    return num;
-}
-
-//Получение позиции строки от пользователя
-int GetRowsPosition()
-{
-    Console.Write("В какой строке ищем? ");
-    int.TryParse(Console.ReadLine(), out int num);
-    while (num <= 0)
-    {
-        Console.WriteLine("Число меньше 1! Нельзя совершить поиск. Введите заново: ");
-        int.TryParse(Console.ReadLine(), out num);
-    }
-    return num;
-}
-
-//Поиска элемента по столбцу и строке   
-void FindElement(int[,] array2d, int column, int row)
-{
-    if (column > array2d.GetLength(0) || row > array2d.GetLength(1))
-    {
-        Console.WriteLine($"Элемента на позиции {column}, {row} не существует");
-        return;
-    }
-    else
-    {
-        Console.WriteLine($"Элемента на позиции {column}, {row} => {array2d[column - 1, row - 1]}");
-        return;
-    }
-}
 
 Console.WriteLine("Программа генерирует двумерный массив из случайных целых чисел в количестве и диапазоне, которое вводит пользователь.");
 Console.WriteLine("После программа показывает значение элемента массива по введённым координатам от пользователя.");
@@ -137,10 +98,5 @@ int max = GetMinMax("максимума");
 
 int[,] random2dArray = CreateRandom2DArray(m, n, min, max);
 PrintArray(random2dArray);
-
-int columnsPosition = GetColumnsPosition();
-int rowsPosition = GetRowsPosition();
-
-FindElement(random2dArray, columnsPosition, rowsPosition);
 
 Author();
