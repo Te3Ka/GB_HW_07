@@ -25,11 +25,14 @@ void PrintArray(float[,] arrayPrint)
 {
     for (int i = 0; i < arrayPrint.GetLength(0); i++)
     {
+        Console.Write("[");
         for (int j = 0; j < arrayPrint.GetLength(1); j++)
         {
-            Console.Write($"{arrayPrint[i,j]}, ");
+            if (j == (arrayPrint.GetLength(1) - 1))
+                Console.WriteLine(String.Format("{0,6:0.00}]", arrayPrint[i, j]));
+            else
+                Console.Write(String.Format("{0,6:0.00} ", arrayPrint[i, j]));
         }
-        Console.WriteLine();
     }
 }
 
@@ -82,7 +85,7 @@ float GetMinMax(string minOrMax)
     return result;
 }
 
-Console.WriteLine("Программа генерирует массив из случайных вещественных чисел в количестве и диапазоне, которое вводит пользователь.");
+Console.WriteLine("Программа генерирует двумерный массив из случайных вещественных чисел в количестве и диапазоне, которое вводит пользователь.");
 int m = GetColumnsLengthArray();
 int n = GetRowsLengthArray();
 float min = GetMinMax("минимума");
